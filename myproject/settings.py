@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-3!37py*((hg))o9sm9t(8t9c8q1wosmvaww*nbr(3nrhl*&4$@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['zain-ondortrades-fbcc76047b71.herokuapp.com', '127.0.0.1', 'localhost', 'www.uniquefindertrades.co.uk', 'uniquefindertrades.co.uk']
+ALLOWED_HOSTS = ['65.2.178.82']
 
 
 # Application definition
