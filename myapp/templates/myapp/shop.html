@@ -1,0 +1,64 @@
+{% extends "myapp/main.html" %}
+{% load static %}
+{% block title %}Shop{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <h1 class="text-center">Shop</h1>
+
+    <div class="homeproducts">
+        <div class="col-lg-12">
+            <div class="row">
+                {% for product in products %}
+                <div class="col-lg-3 col-md-4 col-sm-6 col-xs- mt-5">
+                    <a href="{% url 'product_detail' product.id %}">
+                        <div class="pos__r">
+                            {% if product.productimage_set.exists %}
+                            {% with product.productimage_set.first.image.url as first_image %}
+                            <img src="{{ first_image }}" class="card-img-top" alt="{{ product.title }}">
+                            {% endwith %}
+                            {% endif %}
+                            <h5 class="card-title">{{ product.title }}</h5>
+                            <p class="card-text homeproducts__pfirst">Category: {{ product.get_category_display }}</p>
+                            <p class="card-text homeproducts__psecond text-danger">Price: ${{ product.price }}</p>
+                            <!-- <div class="wishlist">
+                                <i class="fa-regular fa-heart"></i>
+                            </div> -->
+                        </div>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Pagination links -->
+    <div class="pagination mt-3">
+        <span class="step-links">
+            {% if products.has_previous %}
+                <a class="ms-2" href="?page=1">&laquo; first</a>
+                <a class="ms-2" href="?page={{ products.previous_page_number }}">previous</a>
+            {% endif %}
+
+            {% for i in products.paginator.page_range %}
+                {% if products.number == i %}
+                    <span class="current me-2">
+                        {{ i }}
+                    </span>
+                {% elif i > products.number|add:'-3' and i < products.number|add:'3' %}
+                    <a class="ms-2" href="?page={{ i }}">{{ i }}</a>
+                {% elif i == products.number|add:'3' or i == products.number|add:'-3' %}
+                    ...
+                {% endif %}
+            {% endfor %}
+
+            {% if products.has_next %}
+                <a class="ms-2" href="?page={{ products.next_page_number }}">next</a>
+                <a class="ms-2" href="?page={{ products.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+</div>
+
+{% endblock %}

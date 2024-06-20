@@ -1,0 +1,127 @@
+{% extends "myapp/main.html" %}
+{% load static %}
+{% block title %}Contact Us - UniqueFinderTrades{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+  <div class="contactus">
+    <div class="col-lg-12">
+      <div class="row">
+        <div class="col-lg-6">
+          <h5>Infromation Questions</h5>
+          <h3>FAQ's</h3>
+          <hr class="mb-4">
+          <div class="accordion accordion-flush" id="accordionFlushExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                  <b>
+                    Q. Why your products are much cheaper compared to other websites/online stores?
+                  </b>
+                </button>
+              </h2>
+              <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">
+                  A: We own a strong product team to source and find products all over the world. We always get the best
+                  offers so to provide our customers with the best price.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                  <b>
+                    Q. What payment methods can I use?
+                  </b>
+                </button>
+              </h2>
+              <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">
+                  A: We currently accept cash on delivery only.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                  <b>
+                    Q: Do I need to register an account for placing an order?
+                  </b>
+                </button>
+              </h2>
+              <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">
+                  A: No, you can choose to use the guest checkout which only requires you to provide your email address,
+                  billing and delivery address. However, we strongly recommend you to register an account which can
+                  bring you a more efficient and convenient way to track your order status and shipment.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
+                  <b>
+                    Q. What payment methods can I use?
+                  </b>
+                </button>
+              </h2>
+              <div id="flush-collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">
+                  A: We currently accept cash on delivery only.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+         <div class="contactus__form">
+          <h5>
+            INFORMATION ABOUT US
+          </h5>
+          <h3>
+            CONTACT US FOR ANY QUESTIONS
+          </h3>
+          <form action="">
+            <div class="col-lg-12">
+              <div class="row">
+                <div class="col-lg-6">
+                  <p>Your Name</p>
+                  <input type="text">
+                </div>
+                <div class="col-lg-6">
+                  <p>Your Email</p>
+                  <input type="email">
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-12">
+              <div class="row">
+                <div class="col-lg-6">
+                  <p>Phone Number</p>
+                  <input type="tel">
+                </div>
+                <div class="col-lg-6">
+                  <p>Company</p>
+                  <input type="text">
+                </div>
+              </div>
+            </div>
+            <p>Your Message</p>
+            <textarea name="" id="" cols="30" rows="10"></textarea>
+            <div>
+              <button class="cart__btn" type="submit">ASK A QUESTION</button>
+            </div>
+          </form>
+         </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

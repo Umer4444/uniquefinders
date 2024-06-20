@@ -1,0 +1,15 @@
+{% extends "myapp/main.html" %}
+{% load static %}
+
+{% block content %}
+
+{% for item in wishlist_items.products.all %}
+    <!-- Display each wishlist item here -->
+    <p>{{ item.title }}</p>
+    <!-- Add other details as needed -->
+{% empty %}
+    <p>No items in the wishlist</p>
+{% endfor %}
+
+    <p>Your wishlist is empty.</p>
+{% endblock %}

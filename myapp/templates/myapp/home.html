@@ -1,0 +1,416 @@
+{% extends "myapp/main.html" %}
+{% load static %}
+{% block title %}UniqueFinderTrades - Home{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="col-lg-12">
+        <div class="row">
+            <div class="col-lg-3">
+                <ul class="list-group">
+                    <li class="list-group-item d-flex justify-content-between align-items-center bgg__r">
+                        <h4>CATEGORIES</h4>
+                    </li>
+                    <a href="{% url 'category_products' 'Baby' %}">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <P>Baby</P>
+                            <i class="fas fa-chevron-right"></i>
+                        </li>
+                    </a>
+                    <a href="{% url 'category_products' 'DIY & Tools' %}">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <p>DIY & Tools</p>
+                            <i class="fas fa-chevron-right"></i>
+                        </li>
+                    </a>
+                    <a href="{% url 'category_products' 'Grocery' %}">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <p>Grocery</p>
+                            <i class="fas fa-chevron-right"></i>
+                        </li>
+                    </a>
+                    <a href="{% url 'category_products' 'Health & Beauty' %}">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <p>Health & Beauty</p>
+                            <i class="fas fa-chevron-right"></i>
+                        </li>
+                    </a>
+                    <a href="{% url 'category_products' 'Home & Kitchen' %}">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <p>Home & Kitchen</p>
+                            <i class="fas fa-chevron-right"></i>
+                        </li>
+                    </a>
+                    <a href="{% url 'category_products' 'Office Products' %}">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <p>Office Products</p>
+                            <i class="fas fa-chevron-right"></i>
+                        </li>
+                    </a>
+                    <a href="{% url 'category_products' 'Pet Supplies' %}">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <p>Pet Supplies</p>
+                            <i class="fas fa-chevron-right"></i>
+                        </li>
+                    </a>
+                    <a href="{% url 'category_products' 'Sports & Outdoors' %}">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <p>Sports & Outdoors</p>
+                            <i class="fas fa-chevron-right"></i>
+                        </li>
+                    </a>
+                    <a href="{% url 'category_products' 'Toys' %}">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <p>Toys</p>
+                            <i class="fas fa-chevron-right"></i>
+                        </li>
+                    </a>
+                </ul>
+            </div>
+            <div class="col-lg-9">
+                <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0"
+                            class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                            aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                            aria-label="Slide 3"></button>
+                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3"
+                            aria-label="4"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="{% static 'images/felice-wolke-p-JX5Xk7Zoc-unsplash33.jpg' %}"
+                                class="d-block w-100" alt="...">
+                            <div class="carousel-caption  d-md-block mb-5">
+                                <h5>YOUR FAVOURITE ITEMS</h5>
+                                <h1>Pet Products</h1>
+                                <p>Collars + Shampoo + Carpets</p>
+                                <!-- <a href="">SHOP NOW</a> -->
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{% static 'images/jason-briscoe-GliaHAJ3_5A-unsplash.jpg' %}"
+                                class="d-block w-100" alt="...">
+                            <div class="carousel-caption  d-md-block">
+                                <h5>YOUR FAVOURITE ITEMS</h5>
+                                <h1>Office Products</h1>
+                                <p>Pens + Staplers + Stationary</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{% static 'images/elsa-olofsson-Pm0K9Y3EPUc-unsplash.jpg' %}"
+                                class="d-block w-100" alt="...">
+                            <div class="carousel-caption  d-md-block">
+                                <h5>YOUR FAVOURITE ITEMS</h5>
+                                <h1>Home & Kitchen</h1>
+                                <p>Kitechen Wares</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{% static 'images/grovemade-RvPDe41lYBA-unsplash.jpg' %}" class="d-block w-100"
+                                alt="...">
+                            <div class="carousel-caption  d-md-block">
+                                <h5>YOUR FAVOURITE ITEMS</h5>
+                                <h1>Health & Beauty Products</h1>
+                                <p>Brushes + Masks + Hair Dryer + Lip Sticks</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="slider-container mt-5">
+        <div class="slider">
+            <div class="slide">
+                <div class="slidedata">
+
+                    <img src="{% static 'images/fashion-banner-3.jpg' %}" alt="">
+                    <div class="slidedata__cont">
+                        <h6>SUMMER NEW</h6>
+                        <h3>BEAUTY PRODUCTS</h3>
+                        <a href="{% url 'category_products' 'Health & Beauty' %}" class="underline-red">SHOP NOW</a>
+                    </div>
+
+                </div>
+            </div>
+            <div class="slide">
+                <div class="slidedata">
+                    <img src="{% static 'images/fashion-banner-2.jpg' %}" alt="">
+                    <div class="slidedata__cont">
+                        <h6>BEST NEW</h6>
+                        <h3>BABY PRODUCTS</h3>
+                        <a href="{% url 'category_products' 'Baby' %}" class="underline-red">SHOP NOW</a>
+                    </div>
+                </div>
+            </div>
+            <div class="slide">
+                <div class="slidedata">
+                    <img src="{% static 'images/fashion-banner-3.jpg' %}" alt="">
+                    <div class="slidedata__cont">
+                        <h6>2023 NEW</h6>
+                        <h3>TOYS PRODUCTS</h3>
+                        <a href="{% url 'category_products' 'Toys' %}" class="underline-red">SHOP NOW</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bullets-container"></div> <!-- Container for bullets -->
+
+        <button class="prev dis__block">❮</button>
+        <button class="next dis__block">❯</button>
+    </div>
+
+
+
+    <h1 class="text-center mt-5">
+        FEATURED PRODUCTS
+    </h1>
+    <div class="homeproducts">
+        <div class="col-lg-12">
+            <div class="row">
+                {% for product in products %}
+                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 mt-5">
+
+                    <div class="pos__r">
+                        <a href="{% url 'product_detail' product.id %}">
+                            {% if product.productimage_set.exists %}
+                            {% with product.productimage_set.first.image.url as first_image %}
+                            <img src="{{ first_image }}" class="card-img-top" alt="{{ product.title }}">
+                            {% endwith %}
+                            {% endif %}
+                        </a>
+                        <a href="{% url 'product_detail' product.id %}">
+
+                            <h5 class="card-title">{{ product.title }}</h5>
+                            <p class="card-text homeproducts__pfirst">Category: {{ product.get_category_display }}</p>
+                            <p class="card-text homeproducts__psecond text-danger">Price: ${{ product.price }}</p>
+                        </a>
+                        <!-- <div class="wishlist">
+                            <i class="fa-regular fa-heart" id="wishlist_{{ product.id }}" data-product="{{ product.id }}"></i>
+                        </div> -->
+                        
+                        
+                    </div>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+<section>
+    <div class="bestsellers container mt-5">
+        <div class="bestsellers__cont text-center">
+            <h6>
+                WELCOME TO UNIQUE FINDER TRADES
+            </h6>
+            <h1>
+                OUR BESTSELLERS
+            </h1>
+        </div>
+        <div class="owl-carousel owl-theme homeproducts mt-5">
+            {% for product in products_baby %}
+            <div class="item">
+                <a href="{% url 'product_detail' product.id %}">
+                    <div class="pos__r">
+                        {% if product.productimage_set.exists %}
+                        {% with product.productimage_set.first.image.url as first_image %}
+                        <img src="{{ first_image }}" class="card-img-top" alt="{{ product.title }}">
+                        {% endwith %}
+                        {% endif %}
+                        <h5 class="card-title">{{ product.title }}</h5>
+                        <p class="card-text homeproducts__pfirst">Category: {{ product.get_category_display }}</p>
+                        <p class="card-text homeproducts__psecond text-danger">Price: ${{ product.price }}</p>
+                        <!-- <div class="wishlist">
+                            <i class="fa-regular fa-heart"></i>
+                        </div> -->
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+            {% for product in products_diy_tools %}
+            <div class="item">
+                <a href="{% url 'product_detail' product.id %}">
+                    <div class="pos__r">
+                        {% if product.productimage_set.exists %}
+                        {% with product.productimage_set.first.image.url as first_image %}
+                        <img src="{{ first_image }}" class="card-img-top" alt="{{ product.title }}">
+                        {% endwith %}
+                        {% endif %}
+                        <h5 class="card-title">{{ product.title }}</h5>
+                        <p class="card-text homeproducts__pfirst">Category: {{ product.get_category_display }}</p>
+                        <p class="card-text homeproducts__psecond text-danger">Price: ${{ product.price }}</p>
+                        <!-- <div class="wishlist">
+                            <i class="fa-regular fa-heart"></i>
+                        </div> -->
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<section>
+    <div class="customerreviews">
+        <div id="carouselExampleDark" class="carousel carousel-dark slide">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active" data-bs-interval="10000">
+                    <img src="{% static 'images/review-back-ground-image.jpg' %}" class="d-block w-100" alt="...">
+                    <div class="carousel-caption  d-md-block">
+                        <h5>First slide label</h5>
+                        <p>Some representative placeholder content for the first slide.</p>
+                    </div>
+                </div>
+                <div class="carousel-item" data-bs-interval="2000">
+                    <img src="{% static 'images/review-back-ground-image.jpg' %}" class="d-block w-100" alt="...">
+                    <div class="carousel-caption  d-md-block">
+                        <h5>Second slide label</h5>
+                        <p>Some representative placeholder content for the second slide.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="{% static 'images/review-back-ground-image.jpg' %}" class="d-block w-100" alt="...">
+                    <div class="carousel-caption  d-md-block">
+                        <h5>Third slide label</h5>
+                        <p>Some representative placeholder content for the third slide.</p>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+        <div class="customerreviews__data text-center">
+            <h1>
+                CUSTOMERS REVIEWS
+            </h1>
+            <h1>
+                ,,
+            </h1>
+        </div>
+    </div>
+</section>
+
+
+
+
+<script>
+    const prevBtn = document.querySelector('.prev');
+    const nextBtn = document.querySelector('.next');
+    const slider = document.querySelector('.slider');
+    const bulletsContainer = document.querySelector('.bullets-container');
+    let slideIndex = 0;
+
+    // Function to create bullets for each slide
+    function createBullets() {
+        for (let i = 0; i < slider.children.length; i++) {
+            const bullet = document.createElement('div');
+            bullet.classList.add('bullet');
+            if (i === 0) {
+                bullet.classList.add('active');
+            }
+            bullet.addEventListener('click', () => {
+                slideIndex = i;
+                updateSlider();
+                updateBullets();
+            });
+            bulletsContainer.appendChild(bullet);
+        }
+    }
+
+    // Function to update bullets based on active slide
+    function updateBullets() {
+        const bullets = document.querySelectorAll('.bullet');
+        bullets.forEach((bullet, index) => {
+            if (index === slideIndex) {
+                bullet.classList.add('active');
+            } else {
+                bullet.classList.remove('active');
+            }
+        });
+    }
+
+    // Initialize bullets and slider
+    createBullets();
+
+    nextBtn.addEventListener('click', () => {
+        slideIndex = (slideIndex < slider.children.length - 1) ? slideIndex + 1 : 0;
+        updateSlider();
+        updateBullets();
+    });
+
+    prevBtn.addEventListener('click', () => {
+        slideIndex = (slideIndex > 0) ? slideIndex - 1 : slider.children.length - 1;
+        updateSlider();
+        updateBullets();
+    });
+
+    function updateSlider() {
+        const slideWidth = slider.clientWidth;
+        slider.style.transform = `translateX(-${slideWidth * slideIndex}px)`;
+    }
+
+    // Update bullets initially
+    updateBullets();
+
+</script>
+
+
+<!-- <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const wishlistIcons = document.querySelectorAll('.wishlist i.fa-heart');
+    
+        wishlistIcons.forEach(icon => {
+            icon.addEventListener('click', function() {
+                const productId = this.getAttribute('data-product');
+                addToWishlist(productId);
+            });
+        });
+    });
+    
+    function addToWishlist(productId) {
+        // Simulating an AJAX request to add the product to the wishlist
+        // Replace this with your actual AJAX request
+    
+        // After successfully adding to the wishlist, change the icon
+        const wishlistIcon = document.getElementById(`wishlist_${productId}`);
+        wishlistIcon.classList.remove('fa-heart');
+        wishlistIcon.classList.add('fa-check');
+    }
+</script> -->
+
+
+
+
+
+
+{% endblock %}

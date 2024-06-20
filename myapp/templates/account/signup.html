@@ -1,0 +1,163 @@
+{% extends "myapp/main.html" %}
+{% load static %}
+{% comment %} <!-- {% load widget_tweaks %} --> {% endcomment %}
+{% block title %}Signup - UniqueFinderTrades{% endblock %}
+
+{% block content %}
+
+<main>
+    <section class="mb-5">
+        <div class="container">
+            <div class="submitform mt-5">
+                <h3 class="text-center">Signup or login to submit your assignment</h3>
+                <div class="account mt-3">
+                    <div class="account__head">
+                        <p>
+                            Account info
+                        </p>
+                        <p>
+                            <a href="{% url 'account_login' %}"> Already have an account?</a>
+                        </p>
+                    </div>
+                    <div class="account__body text-center">
+                        <form method="post" action="{% url 'account_signup' %}">
+                            {% csrf_token %}
+                            <div class="col-lg-12 mt-3">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-3 col-md-3">
+                                        <label class="float__res" for="">Name</label>
+                                    </div>
+                                    <div class="col-lg-9 col-md-9">
+                                        <input name="username" id="name-input" class="float__l width2-100" type="text"
+                                            pattern="^(?=(?:.*[A-Za-z]){3})(?=.*\d).+$" required>
+                                        <p id="name-validation-error" class="error-text"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 mt-3">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-3 col-md-3">
+                                        <label class="float__res" for="">E-mail</label>
+                                    </div>
+                                    <div class="col-lg-9 col-md-9">
+                                        <input name="email" id="email-input" class="float__l width2-100" type="email"
+                                            required>
+                                    </div>
+                                    <p id="email-validation-error" class="error-text"></p>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 mt-3">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-3 col-md-3">
+                                        <label class="float__res" for="">Password</label>
+                                    </div>
+                                    <div class="col-lg-9 col-md-9">
+                                        <input name="password1" id="password-input" class="float__l width2-100"
+                                            type="password" required>
+                                    </div>
+                                    <p id="password-validation-error" class="error-text"></p>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 mt-3">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-3 col-md-3">
+                                        <label class="float__res" for="">Password</label>
+                                    </div>
+                                    <div class="col-lg-9 col-md-9">
+                                        <input name="password2" class="float__l width2-100" type="password" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div class="col-lg-12 mt-3">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-3 col-md-3 col-xs-3"></div>
+                                    <div class="col-lg-9 col-md-9 col-xs-9 reviews align-items-center">
+                                        <input class="me-2" type="checkbox" name="" id="" required>
+                                        <p>
+                                            I agree with <a href="">terms & conditions</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div> -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                                </div>
+                            </div>
+                            <p>
+                                If you have an account <a href="{% url 'account_login' %}">Login</a>
+                            </p>
+                            <button type="submit" class="btn btn-danger mt-2 mb-3">Create account</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+    crossorigin="anonymous"></script>
+
+<script>
+    function handleDrop(event) {
+        event.preventDefault();
+        var files = event.dataTransfer.files;
+        document.getElementById('fileInput').files = files;
+        handleFiles(files);
+    }
+
+    function handleFiles(files) {
+        var fileNames = [];
+        for (var i = 0; i < files.length; i++) {
+            var file = files[i];
+            fileNames.push(file.name);
+        }
+        document.getElementById('selectedFiles').value = fileNames.join(', ');
+    }
+</script>
+
+<script>
+    const nameInput = document.getElementById('name-input');
+    const nameError = document.getElementById('name-validation-error');
+
+    nameInput.addEventListener('input', () => {
+        if (!nameInput.validity.valid) {
+            nameError.textContent = 'enter name like: Example123';
+        } else {
+            nameError.textContent = '';
+        }
+    });
+</script>
+
+<script>
+    const emailInput = document.getElementById('email-input');
+    const emailError = document.getElementById('email-validation-error');
+
+    emailInput.addEventListener('input', () => {
+        const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+        if (!emailPattern.test(emailInput.value)) {
+            emailError.textContent = 'Enter an email address like: example123@gmail.com';
+        } else {
+            emailError.textContent = '';
+        }
+    });
+</script>
+
+<script>
+    const passwordInput = document.getElementById('password-input');
+    const passwordError = document.getElementById('password-validation-error');
+
+    passwordInput.addEventListener('input', () => {
+        const passwordPattern = /^(?=.*[A-Za-z].*[A-Za-z].*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+
+        if (!passwordPattern.test(passwordInput.value)) {
+            passwordError.textContent = 'Use a strong password "Abcd12@\/> etc"';
+        } else {
+            passwordError.textContent = '';
+        }
+    });
+</script>
+{% endblock  %}
