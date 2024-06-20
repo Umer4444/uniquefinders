@@ -1,0 +1,48 @@
+{% extends "myapp/main.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="shoppingcart">
+    <a href="">
+        ORDER COMPLETE
+    </a>
+</div>
+<div class="checksuccess">
+    <div class="container">
+        <div class="text-center">
+            <h1>Checkout Success</h1>
+            <p>Your order has been placed!</p>
+        </div>
+        <h2>Order Details:</h2>
+        <table class="carttable">
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Product</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                <tr>
+                    <td class="wi__12">
+                        <a href="">
+                            {% if product.productimage_set.exists %}
+                            {% with product.productimage_set.first.image.url as first_image %}
+                            <img src="{{ first_image }}" alt="{{ product.title }}">
+                            {% endwith %}
+                            {% endif %}
+                        </a>
+                    </td>
+                    <td>{{ product.title }} <span>Quantity</span></td>
+                    <td>{{ product.price }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>    
+    </div>
+</div>
+
+
+{% endblock %}

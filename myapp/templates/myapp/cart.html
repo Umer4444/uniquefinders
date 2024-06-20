@@ -1,0 +1,198 @@
+{% extends "myapp/main.html" %}
+{% load static %}
+{% block title %}Cart - UniqueFinderTrades{% endblock %}
+
+{% block content %}
+
+<div class="cart">
+    <div class="shoppingcart mb-5">
+        <a href="">
+            SHOPPING CART
+        </a>
+    </div>
+    {% if products_in_cart %}
+    <div class="container">
+        <div class="col-lg-12">
+            <div class="row">
+                <div class="col-lg-8">
+                    <table class="carttable">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th></th>
+                                <th>Product</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Subtotal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for product in products_in_cart %}
+                            <tr id="cart-row-{{ product.id }}">
+                                <td><i class="fa-solid fa-xmark" onclick="removeFromCart({{ product.id }})"></i></td>
+                                <td class="wi__12">
+                                    <a href="">
+                                        {% if product.productimage_set.exists %}
+                                        {% with product.productimage_set.first.image.url as first_image %}
+                                        <img src="{{ first_image }}" alt="{{ product.title }}">
+                                        {% endwith %}
+                                        {% endif %}
+                                    </a>
+                                </td>
+                                <td><a href="">{{ product.title }}</a></td>
+                                <td class="product-price">${{ product.price }}</td>
+                                <td>
+                                    <div class="quantity">
+                                        <button class="decrement">-</button>
+                                        <input type="number" class="count" value="1" data-product-id="{{ product.id }}">
+                                        <button class="increment">+</button>
+                                    </div>
+                                </td>
+                                <td class="total-price">${{ product.price }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card" id="subtotal-section">
+                        <div class="card-body">
+                            <h3 class="card-title">CART TOTALS</h3>
+                            <hr>
+                            <p class="card-text total__p">Total <span class="float-end" id="subtotal">$0.00</span></p>
+                            <a class="cart__btn" href="{% url 'checkout' %}">PROCEED TO CHECKOUT</a>
+
+                            <!-- Other content in the card -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="text-center cart__empty">
+        <h1>
+            Your cart is currently empty.
+        </h1>
+        <p>
+            Before proceeding to checkout, you must add some products to your shopping cart.
+            <br>
+            You will find a lot of interesting products on our "Shop" page.
+
+        </p>
+        <div class="mt-4">
+            <a class="productdetail__btn mt-4" href="{% url 'shop' %}">RETURN TO SHOP</a>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var userIsAuthenticated = {% if request.user.is_authenticated %}true{% else %}false{% endif %};
+        const decrementBtns = document.querySelectorAll('.decrement');
+        const incrementBtns = document.querySelectorAll('.increment');
+        const countInputs = document.querySelectorAll('.count');
+        const productPrices = document.querySelectorAll('.product-price');
+        const totalPrices = document.querySelectorAll('.total-price');
+        const subtotalElement = document.getElementById('subtotal');
+
+        // Function to update the total price based on quantity
+        function updateTotalPrice(index) {
+            const quantity = parseInt(countInputs[index].value);
+            const price = parseFloat(productPrices[index].textContent.replace('$', ''));
+            const totalPrice = quantity * price;
+            totalPrices[index].textContent = '$' + totalPrice.toFixed(2);
+            updateSubtotal(); // Update subtotal when the total price changes
+            updateTotalPriceInHeader();
+            const productId = countInputs[index].dataset.productId;
+            // Update the hidden input value for quantity
+            document.getElementById(`quantity_${productId}`).value = quantity;
+        }
+
+        // Add event listeners to increment and decrement buttons
+        decrementBtns.forEach((btn, index) => {
+            btn.addEventListener('click', function () {
+                let count = parseInt(countInputs[index].value);
+                if (count > 1) {
+                    count--;
+                    countInputs[index].value = count;
+                    updateTotalPrice(index);
+                }
+            });
+        });
+
+        incrementBtns.forEach((btn, index) => {
+            btn.addEventListener('click', function () {
+                let count = parseInt(countInputs[index].value);
+                count++;
+                countInputs[index].value = count;
+                updateTotalPrice(index);
+            });
+        });
+
+        // Function to calculate the subtotal
+        function updateSubtotal() {
+            let subtotal = 0;
+            totalPrices.forEach(price => {
+                subtotal += parseFloat(price.textContent.replace('$', ''));
+            });
+            subtotalElement.textContent = '$' + subtotal.toFixed(2);
+        }
+
+        // Initial calculation of total prices and subtotal
+        totalPrices.forEach((price, index) => {
+            updateTotalPrice(index);
+        });
+
+        function updateTotalPriceInNavbar() {
+            // Calculate the total price based on the subtotal in the cart
+            const subtotal = parseFloat(subtotalElement.textContent.replace('$', ''));
+
+            $.ajax({
+                url: '/update_total_price/', // Change this to your actual endpoint
+                method: 'POST',
+                data: { subtotal: subtotal },
+                success: function (data) {
+                    $('#totalPrice').text(data.newTotal);
+                }
+            });
+        }
+    });
+</script>
+
+<script>
+    function removeFromCart(productId) {
+        var userIsAuthenticated = {% if request.user.is_authenticated %}true{% else %}false{% endif %};
+        if (userIsAuthenticated) {
+            // Get the CSRF token from the cookie
+            var csrfToken = document.cookie.match(/csrftoken=([^;]+)/)[1];
+
+            // Send an AJAX request to remove the product from the cart
+            $.ajax({
+                url: '/remove-from-cart/' + productId + '/',
+                method: 'POST',
+                headers: { 'X-CSRFToken': csrfToken },
+                success: function (data) {
+                    // Remove the corresponding row from the HTML
+                    $('#cart-row-' + productId).remove();
+
+                    // Update the total price in the header dynamically
+                    updateTotalPriceInHeader();
+
+                    window.location.href = window.location.href;
+  
+
+                },
+                error: function (error) {
+                    console.error('Error removing product from cart:', error.responseText);
+                }
+            });
+        } else {
+            console.error('User not authenticated');
+        }
+    }
+</script>
+
+{% endblock %}

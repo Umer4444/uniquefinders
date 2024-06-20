@@ -1,0 +1,252 @@
+{% extends "myapp/main.html" %}
+{% load static %}
+
+{% block title %}{{ product.title }} - UniqueFinderTrades{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="productdetail">
+        <div class="col-lg-12">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            {% for product_image in product_images %}
+                            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                <img src="{{ product_image.image.url }}" class="d-block w-100" alt="Product Image">
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
+                            data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
+                            data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="productdetail__data">
+                        <p>{{ product.title }}</p>
+                        <h1 class="card-title">{{ product.title }}</h1>
+                        <h4 class="card-text homeproducts__psecond text-danger mt-3">Price: ${{ product.price }}</h4>
+                        <!-- <div class="quantity mb-3">
+                            {% comment %} <button class="decrement">-</button>
+                            <input type="number" class="count" value="1">
+                            <button class="increment">+</button> {% endcomment %}
+                            <button class="productdetail__btn ms-4 add-to-cart" data-product-id="{{ product.id }}">ADD TO CART</button>
+                        </div> -->
+                        <div class="add-to-cart-container mt-4">
+                            <button class="productdetail__btn add-to-cart" data-product-id="{{ product.id }}">ADD TO CART</button>
+                            <div class="loading-indicator" style="display: none;">
+                                <div class="spinner-border" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="mb-3">
+                            <i class="fa-regular fa-heart"></i>
+                            <span> <b>Add to Wishlist</b> </span>
+                        </div> -->
+                        <p class="card-text homeproducts__pfirst mt-4"><b>Category:</b> {{ product.get_category_display }}
+                        </p>
+                        <div class="share__icons mt-4">
+                            <b>Share:</b>
+                            <i class="fa-brands fa-facebook-f"></i>
+                            <i class="fa-solid fa-x"></i>
+                            <i class="fa-brands fa-pinterest"></i>
+                            <i class="fa-brands fa-linkedin-in"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr>
+<div class="container mt-5">
+
+    <div class="tabset">
+        <!-- Tab 1 -->
+        <input type="radio" name="tabset" id="tab1" aria-controls="marzen" checked>
+        <label for="tab1">DESCRIPTION</label>
+        <!-- Tab 2 -->
+        <input type="radio" name="tabset" id="tab2" aria-controls="rauchbier">
+        <label for="tab2">REVIEWS</label>
+        <!-- Tab 3 -->
+        <input type="radio" name="tabset" id="tab3" aria-controls="dunkles">
+        <label for="tab3">SHIPPING AND DELIVERY</label>
+
+        <div class="tab-panels">
+            <section id="marzen" class="tab-panel">
+                <p>Introducing {{ product.title }}, the latest must-have addition to your shopping wishlist! This
+                    extraordinary product seamlessly combines style and functionality, offering you the perfect blend of
+                    innovation and design.</p>
+
+                <h4>Key Features:</h4>
+                <p><strong>Fashion-Forward Design: </strong> Elevate your style with the chic and modern design of {{
+                    product.title }}. It's not just a product; it's a fashion statement.</p>
+
+                <p><strong>Cutting-Edge Technology:</strong> Experience top-notch performance with advanced features
+                    that set {{ product.title }} apart from the rest. Stay ahead of the curve in the world of technology
+                    and style.</p>
+                <p><strong>Quality Assurance:</strong> Crafted with precision and using only the finest materials, {{
+                    product.title }} guarantees durability and reliability. Shop with confidence, knowing you're
+                    investing in a product that stands the test of time.</p>
+                <p><strong>User-Friendly Shopping: </strong> Explore the easy-to-use interface of our shopping website
+                    and make {{ product.title }} yours with just a few clicks. Your seamless shopping experience starts
+                    here!</p>
+                <p>Make a style statement with {{ product.title }} and add it to your cart now. Discover a world of
+                    fashion, technology, and convenience at your fingertips. Shop smart, shop trendy, and make every
+                    purchase count with {{ product.title }}!</p>
+            </section>
+            <section id="rauchbier" class="tab-panel">
+                <h2>6B. Rauchbier</h2>
+                <p><strong>Overall Impression:</strong> An elegant, malty German amber lager with a balanced,
+                    complementary beechwood smoke character. Toasty-rich malt in aroma and flavor, restrained
+                    bitterness, low to high smoke flavor, clean fermentation profile, and an attenuated finish are
+                    characteristic.</p>
+                <p><strong>History:</strong> A historical specialty of the city of Bamberg, in the Franconian region of
+                    Bavaria in Germany. Beechwood-smoked malt is used to make a Märzen-style amber lager. The smoke
+                    character of the malt varies by maltster; some breweries produce their own smoked malt (rauchmalz).
+                </p>
+            </section>
+            <section id="dunkles" class="tab-panel">
+                <p><strong>About shipping:</strong></p>
+                <p>1. Shipping time: normally need 2-5 days to process the order after payment.<br>2. Shipping method:
+                    selected by seller if you choose seller shipping method.<br>KIND NOTES: highly recommend you guys
+                    buy in batch so that we can apply better shipping method, keep tracking all the way and with better
+                    service.</p>
+                <p>Buyer attention:</p>
+                <p>All the items in our store are available to choose colors,remember to leave us message or contact us
+                    when you place the order,otherwise will send random colors.<br>Please don’t hesitate to contact us
+                    ahead of anything else if you have any question or feel unsatisfied.</p>
+            </section>
+        </div>
+
+    </div>
+
+</div>
+<section>
+    <div class="bestsellers container mt-5">
+        <div class="bestsellers__cont text-center">
+            <h1>
+                Related Products
+            </h1>
+        </div>
+        <div class="owl-carousel owl-theme homeproducts mt-5">
+            {% for category_product in category_products %}
+            <div class="item">
+                <a href="{% url 'product_detail' category_product.id %}">
+                    <div class="pos__r">
+                        {% if category_product.productimage_set.exists %}
+                        {% with category_product.productimage_set.first.image.url as first_image %}
+                        <img src="{{ first_image }}" class="card-img-top" alt="{{ category_product.title }}">
+                        {% endwith %}
+                        {% endif %}
+                        <h5 class="card-title">{{ category_product.title }}</h5>
+                        <p class="card-text homeproducts__pfirst">Category: {{ category_product.get_category_display }}
+                        </p>
+                        <p class="card-text homeproducts__psecond text-danger">Price: ${{ category_product.price }}</p>
+                        <!-- <div class="wishlist">
+                            <i class="fa-regular fa-heart"></i>
+                        </div> -->
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const decrementBtns = document.querySelectorAll('.decrement');
+        const incrementBtns = document.querySelectorAll('.increment');
+        const countInputs = document.querySelectorAll('.count');
+
+        decrementBtns.forEach((decrementBtn, index) => {
+            decrementBtn.addEventListener('click', function () {
+                let count = parseInt(countInputs[index].value);
+                if (count > 1) {
+                    count--;
+                    countInputs[index].value = count;
+                    updateTotalPrice(index); // Call the function to update total price
+                }
+            });
+        });
+
+        incrementBtns.forEach((incrementBtn, index) => {
+            incrementBtn.addEventListener('click', function () {
+                let count = parseInt(countInputs[index].value);
+                count++;
+                countInputs[index].value = count;
+                updateTotalPrice(index); // Call the function to update total price
+            });
+        });
+    });
+</script>
+
+
+<script>
+    const addToCartContainers = document.querySelectorAll('.add-to-cart-container');
+
+    addToCartContainers.forEach(container => {
+        const button = container.querySelector('.add-to-cart');
+        const loadingIndicator = container.querySelector('.loading-indicator');
+
+        button.addEventListener('click', function (event) {
+            const productId = event.target.dataset.productId;
+
+            // Check if user is authenticated before adding to cart
+            fetch('/check-authentication/') // Endpoint to check if user is authenticated
+                .then(response => response.json())
+                .then(data => {
+                    if (data.authenticated) {
+                        // Hide the button and show loading indicator
+                        button.style.display = 'none';
+                        loadingIndicator.style.display = 'block';
+
+                        fetch(`/add-to-cart/${productId}/`)
+                            .then(response => {
+                                if (response.ok) {
+                                    console.log('Product added to cart!');
+                                    updateCartDetails(); // Update cart details after successful addition
+                                } else {
+                                    console.error('Failed to add product to cart');
+                                    // Handle error, show an alert or message
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                            })
+                            .finally(() => {
+                                // Show the button and hide loading indicator after a short delay
+                                setTimeout(() => {
+                                    button.style.display = 'block';
+                                    loadingIndicator.style.display = 'none';
+                                }, 1000); // Adjust this duration as needed
+                            });
+                    } else {
+                        // User is not authenticated, show an error message
+                        alert('Please login to add products to your cart.');
+                        // Redirect to login page or perform any other action as needed
+                        window.location.href = "{% url 'account_login' %}"; // Redirect to login page
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        });
+    });
+</script>
+
+
+
+{% endblock %}

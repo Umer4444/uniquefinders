@@ -1,0 +1,147 @@
+{% load static %}
+<header class="headdd">
+    <div class="header__back">
+        <div class="container">
+            <nav>
+                <input type="checkbox" id="check">
+                <label for="check" class="checkbtn">
+                    <i class="fa-solid fa-bars"></i>
+                </label>
+                <a class="nav__a" href="{% url 'home' %}"><img src="{% static 'images/logo_uniquefindertraders without background.png' %}" alt="logo"></a>
+                <ul class="links">
+                    <li><a id="homeLink" href="{% url 'home' %}">HOME</a></li>
+                    <li><a id="aboutLink" href="{% url 'aboutus' %}">ABOUT US</a></li>
+                    <li><a id="shopLink" href="{% url 'shop' %}">SHOP</a></li>
+                    <li><a id="contactLink" href="{% url 'contactus' %}">CONTACT US</a></li>
+
+                    <ul class="links__3">
+                        <!-- <li>
+                        <a href=""><img src="images/Symbol.svg" alt=""></a>
+                    </li> -->
+                        {% if user.is_authenticated %}
+                        <li>
+                            <a href="{% url 'account_logout' %}">LOGOUT</a>
+                        </li>
+                        {% else %}
+                        <li>
+                            <a href="{% url 'account_login' %}">LOGIN / REGISTER</a>
+                        </li>
+                        {% endif %}
+                        <!-- <li>
+                            <a href="">Wishlist
+                                <span>
+                                    <i class="fa-regular fa-heart"></i>
+                                </span>
+                            </a>
+                        </li> -->
+                        <li>
+                            <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
+                        </li>
+                        <!-- <li>
+                            <a href=""><i class="fa-regular fa-heart"></i></a>
+                        </li> -->
+                        <li>
+                            <a href="{% url 'cart_view' %}">
+                                <i class="fa-solid fa-cart-shopping"></i>
+                                Cart (<span class="totalProductsInCart">0</span>)
+                            </a>
+                        </li>
+                        <li>
+                            <p>Total: $<span class="totalPrice">0.00</span></p>
+                        </li>
+                    </ul>
+                </ul>
+                <ul class="links__2">
+                    {% if user.is_authenticated %}
+                    <li>
+                        <a href="{% url 'account_logout' %}">LOGOUT</a>
+                    </li>
+                    <li>
+                        <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
+                    </li>
+                    <!-- <li>
+                        <a href=""><i class="fa-regular fa-heart"></i></a>
+                    </li> -->
+                    <li>
+                        <a href="{% url 'cart_view' %}">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                            Cart (<span class="totalProductsInCart">0</span>)
+                        </a>
+                    </li>
+                    <li>
+                        <p>Total: $<span class="totalPrice">0.00</span></p>
+                    </li>
+                    {% else %}
+                    <li>
+                        <a href="{% url 'account_login' %}">LOGIN / REGISTER</a>
+                    </li>
+                    <li>
+                        <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
+                    </li>
+                    <!-- <li>
+                        <a href=""><i class="fa-regular fa-heart"></i></a>
+                    </li> -->
+                    <li>
+                        <a href="{% url 'cart_view' %}">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                            Cart (<span class="totalProductsInCart">0</span>)
+                        </a>
+                    </li>
+                    <li>
+                        <p>Total: $<span class="totalPrice">0.00</span></p>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<!-- Add jQuery library -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    function updateTotalPriceInHeader() {
+        $.ajax({
+            url: '/get_cart_details/',  // Endpoint to get cart details
+            method: 'GET',
+            success: function (data) {
+                $('.totalProductsInCart').text(data.total_products);
+                $('.totalPrice').text(data.total_price);
+            }
+        });
+    }
+</script>
+
+<script>
+    function updateCartDetails() {
+        $.ajax({
+            url: '/get_cart_details/',  // Endpoint to get cart details
+            method: 'GET',
+            success: function (data) {
+                $('.totalProductsInCart').text(data.total_products);
+                $('.totalPrice').text(data.total_price);
+            }
+        });
+    }
+
+    function updateTotalPriceInHeader() {
+        updateCartDetails();
+    }
+
+    $(document).ready(function () {
+        updateCartDetails();
+
+        // Get the current URL
+        var currentUrl = window.location.pathname;
+
+        // Check each link's href attribute against the current URL and add the 'active' class accordingly
+        $('ul.links a').each(function () {
+            if ($(this).attr('href') === currentUrl) {
+                $(this).addClass('active');
+            }
+        });
+    });
+</script>
+
+
+

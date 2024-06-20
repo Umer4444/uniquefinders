@@ -1,0 +1,35 @@
+{% extends "myapp/main.html" %}
+{% load static %}
+
+{% load i18n %}
+{% block title %}Logout - UniqueFinderTrades{% endblock %}
+
+
+{% block content %}
+<main class="mb-220">
+    <section class="mb-5">
+        <div class="container">
+            <div class="mt-5 text-center">
+                <div class="all-heading">
+                    <h3>
+                        {% trans "Sign Out" %}
+                    </h3>
+                </div>
+            </div>
+            <div class="homecontent">
+                <p>{% trans 'Are you sure you want to sign out?' %}</p>
+            </div>
+            <form method="post" action="{% url 'account_logout' %}">
+                {% csrf_token %}
+                {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                {% endif %}
+                <div class="content__bott">
+                <button type="submit">{% trans 'Sign Out' %}</button>
+                </div>
+            </form>
+        </div>
+    </section>
+</main>
+
+{% endblock %}
